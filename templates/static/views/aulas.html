@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/vistas.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="topBar">
+        <h2 class="title-view">Aulas</h2>
+        <div class="auth">
+            <div id="user-logged"></div>
+            <img src="" alt="img-user" id ="user-img" class="card" >
+        </div>
+    </div>
+    <div class="options">
+        <form>
+            <label for="" class="title-form">Nueva aula</label>
+            <div class="section-block">
+                <label for="">Nivel</label>
+                <select name="nivel" id="nivel">
+                    <option value="">Seleccionar nivel</option>
+                    <option value="Inicial I">Inicial I</option>
+                    <option value="Inicial II">Inicial II</option>
+                    <option value="Primero">Primero</option>
+                    <option value="Segundo">Segundo</option>
+                </select>
+            </div>
+            <div class="section-block">
+                <label for="paralelo">Paralelo</label>
+                <select name="paralelo" id="paralelo">
+                    <option value="">Seleccionar paralelo</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                </select>
+            </div>
+            <div class="section-block">
+                <label for="paralelo">Docente</label>
+                <select name="docente" id="docente"></select>
+            </div>
+            <div class="section-block">
+                <input type="submit" value="Guardar">
+            </div>
+        </form>
+        <table class="table table-striped">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Paralelo</th>
+                    <th scope="col">Docente</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+    <script>
+        let userImg = document.querySelector('#user-img')
+        let userLogged = document.querySelector('#user-logged')
+        let admin = JSON.parse(localStorage.getItem('session-admin'))
+        userImg.src = "../fotos/"+admin.path
+        userLogged.innerHTML = admin.nombre
+
+        let body = document.querySelector('body')
+        let form = document.querySelector('form')
+        let tbody = document.querySelector('tbody')
+        // Ruta hacia donde dirigir las peticiones post y get
+        const route = "/aulas"
+
+        body.addEventListener('click', (e) => {
+            let btnEditar = e.target.dataset.update
+            let btnBorrar = e.target.dataset.delete
+
+            if(btnEditar) {
+                
+            }
+
+            if(btnBorrar) {
+                let id = btnBorrar
+                borrarAula(id)
+            }
+        })
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            let { nivel, paralelo, docente } = e.target
+            if(nivel.value !== "" && paralelo.value !== "" && docente.value !== "") {
+               valorNivel = nivel.value
+               valorParalelo = paralelo.value
+               valorDocente = docente.value
+
+               let data = {
+                    nivel: valorNivel, 
+                    paralelo: valorParalelo,
+                    docente: valorDocente
+                }
+
+               $.post(route, data, (response) => {
+                    if(response.result) {
+                        Swal.fire(
+                            "Listo",
+                            "Aula se ha guardado correctamente",
+                            "success"
+                        )
+                        .then(ok => {
+                            cargarAulas()
+                            form.reset()
+                        })
+                    } else {
+                        Swal.fire(
+                            "Atención",
+                            response.error,
+                            "warning"
+                        )
+                    }
+               })
+
+            } else {
+                Swal.fire(
+                    "Atención",
+                    "Debe seleccionar todos los campos",
+                    "warning"
+                )
+            }
+        })
+
+        function cargarAulas() {
+            tbody.innerHTML = ""
+            $.get(route, (response) => {
+                response.forEach((data, index) => {
+                    let fila = `
+                    <tr data-id="${data._id.$oid}">
+                        <th scope="row" class="text-center">${index + 1}</th>
+                        <td>${data.nivel}</td>
+                        <td>${data.paralelo}</td>
+                        <td>${data.docente[0].nombre}</td>
+                        <td>
+                            <button type= "button" class="btn btn-success"data-update="${data._id.$oid}">Editar</button>
+                            <button type= "button" class="btn btn-danger" data-delete="${data._id.$oid}">Borrar</button>
+                        </td>
+                    </tr>`
+                    tbody.innerHTML += fila
+                }); 
+            })
+        }
+
+        function borrarAula(id) {
+            Swal.fire(
+                "Atención",
+                "¿Está seguro de querer borrar esta aula?",
+                "warning"
+            ).then(ok => {
+                $.post("/borrar-aula", {id}, ({result}) => {
+                    Swal.fire(
+                        "Listo",
+                        "Aula ha sido borrada correctamente",
+                        "success"
+                    ).then(ok => {
+                        if(result) return cargarAulas()
+
+                        Swal.fire(
+                            "Error",
+                            "Ha ocurrido un problema al eliminar el aula",
+                            "error"
+                        )
+                    })
+
+                })
+            })
+        }
+
+        function cargarDocentes() {
+            let selectDocente = document.querySelector("#docente")
+            selectDocente.innerHTML = `<option value="">Seleccione un docente</option>`
+
+            $.get("/docentes", (response) => {
+                response.forEach(docente => {
+                    let option = `
+                        <option value="${docente._id.$oid}">${docente.nombre}</option>
+                   `
+                selectDocente.innerHTML += option
+                
+                })
+            })
+        }
+        cargarDocentes()
+        cargarAulas()
+
+    </script>
+</body>
+</html>

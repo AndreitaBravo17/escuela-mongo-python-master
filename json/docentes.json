@@ -1,0 +1,16 @@
+[
+{
+        "Id_Docente": "1",
+        "Nombre_Apellido": "Leandro Mauricio Restrepo Caseres",
+        "Cedula": "1206575222",
+        "Paralelo": "123455",
+        "Contraseña": "1206575222"
+},
+{
+        "Id_Docente": "2",
+        "Nombre_Apellido": "Julieta Alesya Quiñonez Jimenez",
+        "Cedula": "1206343892",
+        "Paralelo": "123455",
+        "Contraseña": "1206343892"
+}
+]

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrellas | Calificación</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            box-sizing: border-box;
+            height: 100vh;
+        }
+        .container-rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        label {
+            display: inline-block;
+            padding: 0;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        label.reset {
+            font-size: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            margin: 10px 5px;
+            padding: 10px;
+            width: 4.5rem;
+            height: 4.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+
+        }
+
+        label.star {
+            width: 60px;
+            height: 60px;
+        }
+
+        input[name=rating] {
+            display: none;
+        }
+
+        input[type=radio]+label.star svg path {
+            fill: rgb(255, 238, 0);
+            width: 50px;
+            height: 50px;
+        }
+
+        input[type=radio]:checked~label.star svg path {
+            fill: #fff;
+        }
+
+        .btn-ok {
+            width: 4.5rem;
+            height: 4.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            padding: 10px;
+            font-weight: bold;
+            background: greenyellow;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container-btns{
+            width: 100%;
+            display: flex;
+            gap:1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <h2>Califica el juego</h2>
+    <div class="container-rating">
+        <input id=rating0 type=radio value=0 name=rating checked />      
+        <label class=star for=rating1>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 275">
+                <path stroke="#F9A200" stroke-width="15" 
+                d="M150 25l29 86h90l-72 54 26 86-73-51-73 51 26-86-72-54h90z"/>
+            </svg>
+        </label>
+        <input id=rating1 type=radio value=1 name=rating />      
+        <label class=star for=rating2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 275">
+                <path stroke="#F9A200" stroke-width="15"
+                d="M150 25l29 86h90l-72 54 26 86-73-51-73 51 26-86-72-54h90z"/>
+            </svg>
+        </label>
+        <input id=rating2 type=radio value=2 name=rating />      
+        <label class=star for=rating3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 275">
+                <path stroke="#F9A200" stroke-width="15"
+                d="M150 25l29 86h90l-72 54 26 86-73-51-73 51 26-86-72-54h90z"/>
+            </svg>
+        </label>
+        <input id=rating3 type=radio value=3 name=rating />        
+        <label class=star for=rating4>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 275">
+                <path stroke="#F9A200"" stroke-width="15"
+                d="M150 25l29 86h90l-72 54 26 86-73-51-73 51 26-86-72-54h90z"/>
+            </svg>
+        </label>
+        <input id=rating4 type=radio value=4 name=rating />      
+        <label class=star for=rating5>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 275">
+                <path stroke="#F9A200" stroke-width="15"
+                d="M150 25l29 86h90l-72 54 26 86-73-51-73 51 26-86-72-54h90z"/>
+            </svg>
+        </label>
+        <input id=rating5 type=radio value=5 name=rating />
+    </div>
+    <div class="container-btns">
+        <label class=reset for=rating0>Reset</label> 
+        <button class="btn-ok" id="btn-ok">OK</button>
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script>
+
+        // Validar que exista la sesion
+        let starsData = JSON.parse(localStorage.getItem("stars"))
+        if(starsData === null) {
+            window.location = "/"
+        }
+
+        // Seleccionar todos los inputs de las estrellas
+        const changeRating = document.querySelectorAll('input[name=rating]');
+        // Asigamos el evento change que detecta hasta que estrella está seleccionado
+        changeRating.forEach((radio) => {
+            radio.addEventListener('change', getRating);
+        });
+
+        // Inicamos nuestro contador de estrellas
+        let starsCounter = 0;
+
+        // Esta función actualiza nuestro contador de estrellas
+        function getRating() {
+            let estrellas = document.querySelector('input[name=rating]:checked').value;
+            starsCounter = estrellas
+        }
+
+        // Enviamos los datos al servidor
+        $("#btn-ok").on("click", function(){
+            starsData = JSON.parse(localStorage.getItem("stars"))
+            starsData.stars = starsCounter
+            $.post("setStars", {...starsData}, function(respuesta){
+                if(respuesta.result) {
+                    // Destruimso la session y redireccionamos
+                    localStorage.removeItem("stars")
+                    window.location = "/"
+                }
+            })
+        })
+    </script>
+</body>

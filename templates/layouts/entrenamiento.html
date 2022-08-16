@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/rojo.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Entrenamiento | Colores</title>
+</head>
+<body class="container-custom">
+    <h1 class="mb-5">ENTRENAMIENTO DE COLORES</h1>
+    <audio controls autoplay>
+        <source src="../static/images/examen.mp3" alt="" type="audio/mp3">
+    </audio>
+    
+    <div class="vidas">
+        <img class="item" src="../static/images/objetos/corazon.png" alt="">
+        <img class="item" src="../static/images/objetos/corazon.png" alt="">
+        <img class="item" src="../static/images/objetos/corazon.png" alt="">
+    </div>
+
+    <div class="row">
+        <button id="retroceder" class="col-6">Regresar</button>
+        <button id="avanzar" class="col-6">Avanzar</button>
+    </div>
+    <br>
+    <div class="row" id="row">
+        <img class="col-3" data-obj= "pollito" data-value="amarillo" src="../static/images/objetos/pollito.png" alt="">
+        <img class="col-3" data-obj= "cielo" data-value="azul" src="../static/images/objetos/cielo.jpg" alt="">
+        <img class="col-3"data-obj= "tomate"  data-value="rojo" src="../static/images/objetos/tomate.png" alt="">
+        <img class="col-3" data-obj= "mar" data-value="azul" src="../static/images/objetos/mar.jpg" alt="">
+        <img class="col-3" data-obj= "sol" data-value="amarillo" src="../static/images/objetos/sol.png" alt="">
+        <img class="col-3" data-obj= "manzana" data-value="rojo" src="../static/images/objetos/manzana.jpg" alt="">
+        <img class="col-3" data-obj= "mariposa" data-value="azul" src="../static/images/objetos/mariposa.jpg" alt="">
+        <img class="col-3" data-obj= "banano" data-value="amarillo" src="../static/images/objetos/banano.png" alt="">
+    </div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+
+    <script>
+
+        // Validamos que exista la sesión
+        if(JSON.parse(localStorage.getItem("est-python")) === null) {
+            window.location = "/"
+        }
+
+        // Leer los datos de la sesión
+        let st = JSON.parse(localStorage.getItem("est-python"))
+        // Guardamos las vidas que tiene actualmente
+        let vidas = st.vidas
+        // Seleccionamos el contenedor de los corazones de las vidas
+        let contenedor = document.querySelector('.vidas')
+        contenedor.innerHTML = ""
+
+        // Agregar los corazones de las vidas 
+        for(let i = 0; i < vidas; i++){
+            let img = `<img class="item" src="../static/images/objetos/corazon.png" alt="">`
+            contenedor.innerHTML += img
+        }
+
+        // Alamcenar objetos seleccionados
+        let respuestas = []
+        let objetos = []
+
+        // Creamos un nuevo objeto de sesión
+        let objStars = {
+            cedula: "",
+            stars: 0
+        }
+        let data = {vidas : 3}
+        $("#row").on("click", function(e){
+            // Validamos que no pueda jugar si ya no tiene vidas
+            
+            if(data.vidas === 0) {
+                Swal.fire(
+                    'Oops!',
+                    'Ya no tienes vidas!',
+                    'warning'
+                )
+                return
+            }
+
+            // Validamos el click sobre las imagenes
+            if(e.target.classList.contains("col-3")) {
+                let color = e.target.dataset.value
+                let obj = e.target.dataset.obj
+
+                // Validamos si la imagen no ha sido clickeada y la agregamos
+                if(objetos.filter(item => item === obj).length === 0) {
+                    objetos.push(obj)
+                    respuestas.push(color)
+                } 
+
+                // Verificamos si ya tenems la 4 imagenes
+                if(respuestas.length === 4) {
+                    // Filtramos para saber cuantas images hay de cada color
+                    let rojas = respuestas.filter(res => res === "rojo").length
+                    let amarillas = respuestas.filter(res => res === "amarillo").length
+                    let azules = respuestas.filter(res => res === "azul").length
+
+                    // Comrpobamos si ya acertamos
+                    if(rojas == 2 && amarillas === 1 && azules === 1) {
+                        Swal.fire(
+                            ':)    :)   !',
+                            'Has ganado!',
+                            'success'
+                        )
+                        .then(ok => {
+                            data.vidas = 3
+                            for(let i = 0; i < vidas; i++){
+                                let img = `<img class="item" src="../static/images/objetos/corazon.png" alt="">`
+                                contenedor.innerHTML += img
+                            }
+                            objetos = []
+                            respuestas = []
+                        })
+                    } else {
+                        // Si no acertamos hacemos esto
+                        // Quita mos un corazoncito de las vidas
+                        let heart = document.querySelectorAll(".item")[0]
+                        document.querySelector(".vidas").removeChild(heart)
+                        // Restamos una vida
+                        data.vidas--
+
+                        // Verficamos que aun tengamos vidas
+                        if(data.vidas > 0) {
+                            Swal.fire(
+                                'Oops!',
+                                `Sigue intentando, aun tienes ${data.vidas} vidas!`,
+                                'warning'
+                            )
+                            .then(ok => {
+                                // Resetamos los objetos que nos permiten validar
+                                objetos = []
+                                respuestas = []
+                            })
+                        } else {
+                            // Esto se ejecuta si no tiene vidas ya
+                            Swal.fire(
+                                ' :|    :| !',
+                                `Ya no tienes más vidas!`,
+                                'warning'
+                            )
+                            .then(ok => {
+                                data.vidas = 3
+                                for(let i = 0; i < vidas; i++){
+                                    let img = `<img class="item" src="../static/images/objetos/corazon.png" alt="">`
+                                    contenedor.innerHTML += img
+                                }
+                                objetos = []
+                                respuestas = []
+                            })
+                        }
+
+                    }
+
+                }
+                
+            }
+
+        })
+
+        $("#avanzar").on("click", function(){
+            window.location = "/test"
+        })
+        $("#retroceder").on("click", function(){
+            window.location = "/azul"
+        })
+
+    </script>
+</body>
+</html>
+
+</body>
+</html>

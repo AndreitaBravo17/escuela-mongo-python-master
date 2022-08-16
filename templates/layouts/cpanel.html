@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/cpanel.css">
+    <title>C-Panel</title>
+</head>
+<body>
+    <div class="container">
+        <div class="options">
+            <h2 class="bar-title">Mi Escuela</h2>
+            <ul>
+                <li data-id="teachers">Docentes</li>
+                <li data-id="students">Estudiantes</li>
+                <li data-id="courses">Aulas</li>
+                <li data-id="subjects">Materias</li>
+                <li data-id="roles">Roles</li>
+                <li data-id="close">Salir</li>
+            </ul>
+        </div>
+        <iframe src="static/views/aulas.html" frameborder="0" class="views"></iframe>
+    </div>
+    <script>
+        const keyAdmin = "session-admin"
+        let storage = localStorage.getItem(keyAdmin)
+        if(storage === null) {
+            window.location = "/admin"
+        }
+
+        let body = document.querySelector("body")
+        let view = document.querySelector("iframe")
+        body.addEventListener("click", (e) => {
+            let id = e.target.dataset.id
+            switch (id) {
+                case "teachers":
+                    view.src = "static/views/docentes.html"
+                    break;
+                case "students":
+                    view.src = "static/views/estudiantes.html"
+                    break;
+                case "courses":
+                    view.src = "static/views/aulas.html"
+                    break;
+                case "subjects":
+                    view.src = "static/views/materias.html"
+                    break;
+                case "roles":
+                    view.src = "static/views/roles.html"
+                    break;
+                case "close":
+                    localStorage.removeItem(keyAdmin)
+                    window.location = "/admin"
+                    break;
+                default:
+                    ""
+            }
+        })
+
+    </script>
+</body>
+</html>

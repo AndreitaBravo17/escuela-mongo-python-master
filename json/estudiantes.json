@@ -1,0 +1,242 @@
+[
+    {
+        "Id_Estudiante" : "1208235100",
+        "Nombre_Apellido" : "Miguel Angel Monar Astudillo",
+        "Paralelo" : "A",
+        "Foto": "foto_1208235100.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante" : "1206735101",
+        "Nombre_Apellido": "Norma Teresa Jijón Mora",
+        "Paralelo" : "A",
+        "Foto" : "foto_1206735101.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante" : "0985635102",
+        "Nombre_Apellido" : "Escarleth Tina Obando Velez",
+        "Paralelo" : "A",
+        "Foto" : "foto_0985635102.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1231345103",
+        "Nombre_Apellido": "Sara Maribel Galarza Urrutia",
+        "Paralelo" : "A",
+        "Foto": "foto_1231345103.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1257235104",
+        "Nombre_Apellido": "Andres Gustavo Iñiguez Toapantas",
+        "Paralelo": "A",
+        "Foto": "foto_1257235104.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1279235105",
+        "Nombre_Apellido": "Sergio Manuel Cordova Zapata",
+        "Paralelo": "A",
+        "Foto": "foto_1279235105.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1286635106",
+        "Nombre_Apellido": "Victor Andrés Piedraita Molina",
+        "Paralelo": "A",
+        "Foto": "foto_1286635106.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1276555107",
+        "Nombre_Apellido": "José Miguel Gonzales Morales",
+        "Paralelo": "A",
+        "Foto": "foto_1276555107.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1287735108",
+        "Nombre_Apellido": "Diana Felicia Escobar Uchubanda",
+        "Paralelo": "A",
+        "Foto": "foto_1287735108.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1275635109",
+        "Nombre_Apellido": "Arnoldo Henri Henriquez Lima",
+        "Paralelo": "A",
+        "Foto": "foto_1275635109.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1898235200",
+        "Nombre_Apellido": "Antonio Ronaldo Paredes Ramirez",
+        "Paralelo": "B",
+        "Foto": "foto_1898235200.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1276735201",
+        "Nombre_Apellido": "Sebastían Iker Morales Guerra",
+        "Paralelo": "B",
+        "Foto": "foto_1276735201.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1245635202",
+        "Nombre_Apellido": "Peter Arturo Contreras López",
+        "Paralelo": "B",
+        "Foto": "foto_1245635202.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1231345203",
+        "Nombre_Apellido": "Frecia Amanda Flores Mera",
+        "Paralelo": "B",
+        "Foto": "foto_1231345203.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1757235204",
+        "Nombre_Apellido": "Luisa Anahí Guevara Castro",
+        "Paralelo": "B",
+        "Foto": "foto_1757235204.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1879235205",
+        "Nombre_Apellido": "Eugenia Valentina Torres Escobar",
+        "Paralelo": "B",
+        "Foto": "foto_1879235205.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1286635206",
+        "Nombre_Apellido": "Freddy Alberto Dávila Hidalgo",
+        "Paralelo": "B",
+        "Foto": "foto_1286635206.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1276555207",
+        "Nombre_Apellido": "Wladimir Estuardo Urrutia Perez",
+        "Paralelo": "B",
+        "Foto": "foto_1276555207.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1287735208",
+        "Nombre_Apellido": "Ana Rosa Rodriguez López",
+        "Paralelo": "B",
+        "Foto": "foto_1287735208.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    },
+    {
+        "Id_Estudiante": "1275635209",
+        "Nombre_Apellido": "Germania Elizabeth Nuñez Velez",
+        "Paralelo": "B",
+        "Foto": "foto_1275635209.jpg",
+        "Test": {
+            "Tiempo": 0,
+            "Nota": 0,
+            "Resuelto": false,
+            "Estrellas": 0
+        }
+    }
+]

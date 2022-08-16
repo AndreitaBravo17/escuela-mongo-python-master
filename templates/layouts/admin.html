@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Login | Admin</title>
+    <style>
+        .height {
+            height: 100vh;
+            background: rgb(95, 166, 198);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .padding {
+            padding: 1.5rem;
+        }
+
+        .reduce-width {
+            width: 60%;
+            justify-self: center;
+        }
+    </style>
+  
+</head>
+<body class="d-flex height">
+    <form class="container col-4 bg-white card padding">
+        <div class="container d-flex justify-content-center mb-4">
+            <img src="../static/images/logotipo.jpg" class="d-flex w-50 text-center" alt="">
+        </div>
+        <div class="form-group">
+            <h3 class="text-center">Admin</h3>
+            <label for="exampleInputEmail1">Usuario</label>
+            <input type="text" class="form-control" id="username" name="username"   placeholder="Ingrese su usuario" required>
+            <small id="user-error" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group ">
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Ingrese su contraseña" required>
+            <small id="pass-error" class="form-text text-muted"></small>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-5">Acceder</button>
+        </form>   
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+    <script>
+        // Verifcar si existe la sesion
+        // Si la session existe redirecciona a la ventana de las notas
+        let storage = localStorage.getItem("session-admin")
+        if(storage !== null) {
+            window.location = "/c-panel"
+        }
+        
+        // Validamos los datos de acceso
+        $("form").on("submit", (e) => {
+            e.preventDefault()
+            let {username, password} = e.target
+            if(username.value !== "" && password.value !=="") {
+                $.post("/sesion-admin", $("form").serialize(), function(response) {
+                    if(!response.access) {
+                        Swal.fire(
+                            'Atención!',
+                            response.error,
+                            'warning'
+                        )
+                    } else {
+                        let data = JSON.stringify(response.body)
+                        let storage = localStorage.setItem("session-admin", data)
+                        window.location = "/c-panel"
+                    }
+                })
+            } else {
+                console.log("Rellene todos los campos")
+            }
+
+
+        })
+    </script>
+</body>
+</html>

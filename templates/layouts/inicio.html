@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiante | Ingreso</title>
+    <link rel="stylesheet" href="../static/css/estudiantes.css">
+    <link rel="stylesheet" href="../static/css/rojo.css">
+</head>
+<body class="container-custom">
+    <h1>BIENVENIDOS QUERIDOS ESTUDIANTES !!</h1>
+    <h3>Selecciona tu paralelo</h3>
+    <div class="container-btns">
+        <button id="ParaleloA" class="custom-btn">A</button>
+        <button id="ParaleloB" class="custom-btn">B</button>
+    </div>
+    <audio autoplay>
+        <source src="../static/images/bienvenida.mp3" type="audio/mp3">
+    </audio>
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+
+    <script>
+
+        // Creamos el objeto que contendrá la sesión
+        let data = {
+            cedula: "",
+            paralelo: "",
+            tiempo: "",
+            vidas: 3,
+            nota:"",
+            rojo: 0,
+            amarillo: 0,
+            azul: 0
+        }
+
+        // Definimos el paralelo de la sesión
+        $("#ParaleloA").on("click", () => {
+            localStorage.setItem("est-python", JSON.stringify(data))
+            let storage = JSON.parse(localStorage.getItem("est-python"))
+            storage.paralelo = "A"
+            localStorage.setItem("est-python", JSON.stringify(storage))
+            window.location = "/estudiante"
+        })
+
+        $("#ParaleloB").on("click", () => {
+            localStorage.setItem("est-python", JSON.stringify(data))
+            let storage = JSON.parse(localStorage.getItem("est-python"))
+            storage.paralelo = "B"
+            localStorage.setItem("est-python", JSON.stringify(storage))
+            window.location = "/estudiante"
+        })
+
+    </script>
+    <footer>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="/docente" class="btn btn-secondary btn-lg disabled" role="button" aria-disabled="true">Iniciar Sesión Docentes</a>
+    </footer>
+     
+
+</body>
+</html>

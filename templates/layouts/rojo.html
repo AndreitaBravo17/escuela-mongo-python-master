@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/rojo.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Color | Rojo</title>
+</head>
+<body class="container-custom">
+    <h1 class="mb-5">EL COLOR ROJO</h1>
+    <div class="container-custom">
+        <audio controls autoplay>
+            <source src="../static/images/rojo.mp3" alt="" type="audio/mp3">
+        </audio>
+        <div class="row">
+            <button id="avanzar">Avanzar</button>
+        </div>
+    </div>
+    <div class="row" id="imagenes">
+        <img class="col-4 hidden" src="../static/images/objetos/manzana.jpg" alt="">
+        <img class="col-4 hidden" src="../static/images/objetos/tomate.png" alt="">
+        <img class="col-4 hidden" src="../static/images/objetos/corazon.png" alt="">
+    </div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+
+    <script>
+
+        // Verificamos que la sesión exista
+        if(localStorage.getItem("est-python") === null) {
+            window.location = "/"
+        } 
+    
+        let storage = JSON.parse(localStorage.getItem("est-python"))
+        let cedula = storage.cedula
+        
+        if(cedula === "") {
+            window.location = "/"
+        }
+        
+        // Iniciamos un temporizador
+        let tiempo = 0
+
+        setInterval(()=>{
+            tiempo++
+        }, 100)
+
+
+        setTimeout(()=>{
+           let manzana = document.querySelectorAll(".col-4")[0]
+           manzana.classList.remove("hidden")
+        }, 19000)
+
+        setTimeout(()=>{
+           let tomate = document.querySelectorAll(".col-4")[1]
+           tomate.classList.remove("hidden")
+        }, 21000)
+
+        setTimeout(()=>{
+           let corazon = document.querySelectorAll(".col-4")[2]
+           corazon.classList.remove("hidden")
+        }, 23000)
+
+        setTimeout(()=>{
+           let btn = document.querySelector("#avanzar")
+           btn.classList.add("mover")
+        }, 30000)
+
+
+        $("#avanzar").on("click", function(){
+            let storage = JSON.parse(localStorage.getItem("est-python"))
+            let segundos = tiempo
+            storage.rojo += segundos
+            localStorage.setItem("est-python", JSON.stringify(storage))
+            window.location = "/amarillo"
+        })
+    </script>
+</body>
+</html>
